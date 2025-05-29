@@ -3,11 +3,11 @@ const mysql = require('mysql2');
 
 //creo la connessione al db
 const connection = mysql.createConnection({
-    host: "",
-    port: "",
-    user: "",
-    password: "",
-    database: ""
+    host: process.env.DB_HOST || 'loocalhost',
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 })
 
 //effettuo la connessione

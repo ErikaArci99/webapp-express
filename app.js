@@ -4,8 +4,14 @@ console.log('hello world');
 const express = require('express');
 const app = express();
 
+//importo dotenv
+const dotenv = require('dotenv')
+
+//uso dotenv
+dotenv.config();
+
 //definisco la porta
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 //uso il middleware per gli asset statici
 app.use(express.static('public'));
