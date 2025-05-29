@@ -40,8 +40,11 @@ app.get("/", (req, res) => {
     res.send('movies api server');
 });
 
-// middleware per gestire tutte le rotte non trovate (404)
+// middleware per gestire le rotte non trovate (404)
 app.use(notFound);
+
+// middleware per la gestione degli errori
+app.use(errorHandler);
 
 // dico al server di rimanere in ascolto sulla porta
 app.listen(port, () => {

@@ -1,11 +1,11 @@
 const connection = require('../data/db');
 
-// INDEX - elenco di tutti i film
-const index = (req, res) => {
+// INDEX
+const index = (req, res, next) => {
     connection.query("SELECT * FROM movies", (err, moviesResult) => {
-        if (err) return res.status(500).json({ error: "Database query failed: " + err });
+        if (err) return next(err); // passo l’errore al middleware
 
-        const movies = moviesResult.map((movie) => ({
+        const movies = moviesResult.map(movie => ({
             ...movie,
             image: req.imagePath + movie.image
         }));
@@ -14,24 +14,26 @@ const index = (req, res) => {
     });
 };
 
-// SHOW - dettaglio film + recensioni
-const show = (req, res) => {
+// SHOW
+const show = (req, res, next) => {
     const { id } = req.params;
 
     const movieSql = "SELECT * FROM movies WHERE id = ?";
     const reviewsSql = "SELECT * FROM reviews WHERE movie_id = ?";
 
     connection.query(movieSql, [id], (err, movieResult) => {
-        if (err) return res.status(500).json({ error: "Database query failed: " + err });
+        if (err) return next(err);
 
         if (movieResult.length === 0 || movieResult[0].id === null) {
-            return res.status(404).json({ error: "Film non trovato" });
+            const notFoundError = new Error('Film non trovato');
+            notFoundError.status = 404;
+            return next(notFoundError);
         }
 
         const movie = movieResult[0];
 
         connection.query(reviewsSql, [id], (err, reviewResult) => {
-            if (err) return res.status(500).json({ error: "Database query failed: " + err });
+            if (err) return next(err);
 
             movie.reviews = reviewResult;
 
@@ -40,4 +42,7 @@ const show = (req, res) => {
     });
 };
 
-module.exports = { index, show }
+module.exports = {
+    index,
+    show
+};
