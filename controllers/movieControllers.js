@@ -1,3 +1,6 @@
+const { json } = require('express');
+const connection = require('../data/db');
+
 const index = (req, res) => {
     console.log('elenco film')
 }

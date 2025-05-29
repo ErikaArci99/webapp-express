@@ -16,7 +16,7 @@ connection.connect((err) => {
         console.log("errore to connect to my sql:" + err)
     }
     else {
-        console.lg("connected to my sql")
+        console.log("connected to my sql")
     }
 })
 
