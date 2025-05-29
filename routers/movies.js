@@ -1,5 +1,8 @@
-//importiamo il controller
+// importo express
+const express = require('express');
+const router = express.Router();
 
+//importiamo il controller
 const movieControllers = require('../controllers/movieControllers');
 
 // INDEX 
