@@ -1,5 +1,5 @@
 //importo mysql2
-const myswl = require('mysql2');
+const mysql = require('mysql2');
 
 //creo la connessione al db
 const connection = mysql.createConnection({
