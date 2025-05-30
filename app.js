@@ -16,6 +16,7 @@ const port = process.env.SERVER_PORT || 3000;
 // importo i middleware
 const imagePath = require('./middlewares/imagePath');
 const notFound = require('./middlewares/notFound');
+const errorHandler = require('./middlewares/errorHandler')
 
 // uso il middleware per gli asset statici generici (es. CSS, JS)
 app.use(express.static('public'));

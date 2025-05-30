@@ -1,5 +1,5 @@
 const imagePath = (req, res, next) => {
-    req.imagePath = '/img/movies/';
+    req.imagePath = './public/img/movies/';
     next();
 };
 
