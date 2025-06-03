@@ -12,7 +12,10 @@ const cors = require('cors');
 require('dotenv').config();
 
 // uso cors prima degli asset statici
-app.use(cors({ origin: process.env.FE_APP || "http://127.0.0.1:3000" }));
+app.use(cors({
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173"]
+}));
+
 
 // definisco la porta
 const port = process.env.SERVER_PORT || 3000;
