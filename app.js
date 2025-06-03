@@ -1,22 +1,18 @@
+// mostra un messaggio in console
 console.log('hello world');
-
-// importa cors
-const cors = require('cors');
-
-// importa dotenv per leggere .env 
-require('dotenv').config();
-
-app.use(cors({ origin: process.env.FE_APP || "http://127.0.0.1:3000" }));
 
 // importo express e lo inizializzo
 const express = require('express');
 const app = express();
 
-// importo dotenv
-const dotenv = require('dotenv');
+// importo cors
+const cors = require('cors');
 
-// uso dotenv
-dotenv.config();
+// importo dotenv per leggere .env 
+require('dotenv').config();
+
+// uso cors prima degli asset statici
+app.use(cors({ origin: process.env.FE_APP || "http://127.0.0.1:3000" }));
 
 // definisco la porta
 const port = process.env.SERVER_PORT || 3000;
@@ -24,9 +20,9 @@ const port = process.env.SERVER_PORT || 3000;
 // importo i middleware
 const imagePath = require('./middlewares/imagePath');
 const notFound = require('./middlewares/notFound');
-const errorHandler = require('./middlewares/errorHandler')
+const errorHandler = require('./middlewares/errorHandler');
 
-// uso il middleware per gli asset statici generici (es. CSS, JS)
+// uso il middleware per gli asset statici generici (es. css, js)
 app.use(express.static('public'));
 
 // uso il middleware per servire immagini da /public/img
