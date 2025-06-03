@@ -1,5 +1,13 @@
 console.log('hello world');
 
+// importa cors
+const cors = require('cors');
+
+// importa dotenv per leggere .env 
+require('dotenv').config();
+
+app.use(cors({ origin: process.env.FE_APP || "http://127.0.0.1:3000" }));
+
 // importo express e lo inizializzo
 const express = require('express');
 const app = express();
