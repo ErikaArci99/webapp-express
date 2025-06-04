@@ -42,6 +42,25 @@ const show = (req, res, next) => {
     });
 };
 
+// STORE - salva un nuovo film con immagine nel database
+const store = (req, res, next) => {
+    const { title, director, abstract } = req.body;
+
+    // multer salva l'immagine in req.file
+    const imageName = req.file.filename;
+
+    const sql = 'INSERT INTO movies (title, a, genre, release_year, abstract, image) VALUES (?, ?, ?, ?, ?, ?)';
+
+    connection.query(sql, [title, director, genre, release_year, abstract, imageName], (err, result) => {
+        if (err) return next('errore nel caricamento nuovo film');
+
+        res.status(201).json({
+            message: 'film inserito con successo',
+            status: 'success',
+        });
+    });
+};
+
 module.exports = {
     index,
     show
