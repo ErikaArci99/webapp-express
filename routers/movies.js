@@ -14,7 +14,7 @@ router.get('/', moviesControllers.index);
 // SHOW - dettaglio di un singolo film
 router.get('/:id', moviesControllers.show);
 
-// STORE - aggiunge un nuovo film con upload immagine
-router.post('/', upload.single('image'), moviesControllers.store);
+// POST - salva una nuova recensione
+router.post('/', moviesControllers.store);
 
 module.exports = router;

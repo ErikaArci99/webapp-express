@@ -62,5 +62,6 @@ const store = (req, res, next) => {
 
 module.exports = {
     index,
-    show
+    show,
+    store
 };
