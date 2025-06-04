@@ -28,8 +28,8 @@ const errorHandler = require('./middlewares/errorHandler');
 // uso il middleware per gli asset statici generici (es. css, js)
 app.use(express.static('public'));
 
-// uso il middleware per servire immagini da /public/img
-app.use('/img', express.static('public/img'));
+// // uso il middleware per servire immagini da /public/img
+// app.use('/img', express.static('public/img'));
 
 // uso il middleware per parsare il body json
 app.use(express.json());
