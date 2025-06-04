@@ -42,24 +42,23 @@ const show = (req, res, next) => {
     });
 };
 
-// STORE - salva un nuovo film con immagine nel database
+// STORE - salva una nuova recensione per un film
 const store = (req, res, next) => {
-    const { title, director, abstract } = req.body;
+    const { movie_id, name, vote, text } = req.body;
 
-    // multer salva l'immagine in req.file
-    const imageName = req.file.filename;
+    const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)';
 
-    const sql = 'INSERT INTO movies (title, a, genre, release_year, abstract, image) VALUES (?, ?, ?, ?, ?, ?)';
-
-    connection.query(sql, [title, director, genre, release_year, abstract, imageName], (err, result) => {
-        if (err) return next('errore nel caricamento nuovo film');
+    connection.query(sql, [movie_id, name, vote, text], (err, result) => {
+        if (err) return next(err);
 
         res.status(201).json({
-            message: 'film inserito con successo',
+            message: 'recensione inserita con successo',
             status: 'success',
         });
     });
 };
+
+
 
 module.exports = {
     index,
